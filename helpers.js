@@ -118,4 +118,22 @@ exports.getNetworkRow = function(network) {
       network.shared || 'N/A'];
 };
 
+exports.getSubnetTableDefinition = function() {
+ return {
+    head: ['ID', 'Tenant ID', 'Network ID', 'NAME', 'DHCP', 'IP Version', 'Gateway IP'],
+    colWidths: [40, 40, 40, 20, 10, 15, 20]
+  };
+};
+
+exports.getSubnetRow = function(network) {
+  return  [
+      network.id,
+      network.tenantId || 'N/A',
+      network.networkId || 'N/A',
+      network.name || 'N/A',
+      network.enableDhcp ? 'Enabled' : 'Disabled',
+      network.ipVersion || 'N/A',
+      network.gatewayIp || 'N/A'];
+};
+
 module.exports = exports;
