@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+var program = require('commander');
+var helpers = require('../helpers');
+
+program
+  .option('-s, --subnetId <subnet Id>', 'Id of the subnet to delete')
+  .parse(process.argv);
+
+var config = program.config;
+if (!config) {
+  config = process.env['HOME']+'/pkgcloud-cli.json';
+}
+
+var deleteSubnetResult = function (err) {
+  if (err) {
+    console.log(err.message);
+  }
+  else {
+    console.log('The subnet was successfully deleted.');
+  }
+};
+
+helpers.init(config, helpers.CLIENT_TYPES.network, function(err, client) {
+  client.destroySubnet(program.subnetId, deleteSubnetResult);
+});
