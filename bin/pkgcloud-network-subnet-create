@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+var program = require('commander');
+var helpers = require('../helpers');
+var table = require('cli-table');
+
+program
+  .option('-a, --name <subnet Name>', 'Desired subnet name')
+  .option('-n, --networkId <networkId>', 'The network Id')
+  .option('-t, --tenantId <tenantId>', 'The tenant Id')
+  .option('-i, --ipVersion <ipVersion>', 'The Ip Version')
+  .option('-c, --cidr <cidr>', 'The cidr')
+  .parse(process.argv);
+
+var config = program.config;
+if (!config) {
+  config = process.env['HOME']+'/pkgcloud-cli.json';
+}
+
+
+var createSubnetResult = function (err, subnet) {
+  if (err) {
+    console.log(err.message);
+  }
+  else {
+    console.log('The subnet was successfully created.');
+    var tbl = new table(helpers.getSubnetTableDefinition()),
+    data = helpers.getSubnetRow(subnet);
+    tbl.push(data);
+    console.log(tbl.toString());
+  }
+};
+
+helpers.init(config, helpers.CLIENT_TYPES.network, function(err, client) {
+  var det = {
+    name: program.name,
+    shared: program.shared,
+    tenantId: program.tenantId,
+    cidr: program.cidr,
+    networkId: program.networkId,
+    ipVersion: program.ipVersion
+  };
+  client.createSubnet(det, createSubnetResult);
+});
