@@ -6,4 +6,6 @@ program
   .command('network-create', 'Create new network')
   .command('network-destroy', 'Destroy a network')
   .command('subnet-list', 'List subnets')
+  .command('subnet-create', 'Create new subnet')
+  .command('subnet-destroy', 'Destroy a subnet')
   .parse(process.argv);
