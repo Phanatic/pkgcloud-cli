@@ -40,7 +40,11 @@
     "pkgcloud-network": "./bin/pkgcloud-network",
     "pkgcloud-network-network-list": "./bin/pkgcloud-network-network-list",
     "pkgcloud-network-network-create": "./bin/pkgcloud-network-network-create",
-    "pkgcloud-network-network-destroy": "./bin/pkgcloud-network-network-destroy"
+    "pkgcloud-network-network-destroy": "./bin/pkgcloud-network-network-destroy",
+    "pkgcloud-network-subnet-list": "./bin/pkgcloud-network-subnet-list",
+    "pkgcloud-network-subnet-create": "./bin/pkgcloud-network-subnet-create",
+    "pkgcloud-network-subnet-destroy": "./bin/pkgcloud-network-subnet-destroy"
+
   },
   "repository": {
     "type": "git",
