@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+var program = require('commander');
+
+program
+  .command('list', 'List subnets')
+  .command('create', 'Create new subnet')
+  .command('destroy', 'Destroy a subnet')
+  .parse(process.argv);
