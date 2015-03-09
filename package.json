@@ -1,6 +1,6 @@
 {
   "name": "pkgcloud-cli",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "CLI for pkgcloud",
   "scripts": {
     "test": "make test"
@@ -28,9 +28,12 @@
     "pkgcloud-dns-list-zone-records": "./bin/pkgcloud/dns/list-zone-records",
     "pkgcloud-dns-list-zones": "./bin/pkgcloud/dns/list-zones",
     "pkgcloud-network": "./bin/pkgcloud/network/network",
-    "pkgcloud-network-create": "./bin/pkgcloud/network/network",
-    "pkgcloud-network-list": "./bin/pkgcloud/network/network",
-    "pkgcloud-network-destroy": "./bin/pkgcloud/network/network",
+    "pkgcloud-network-create": "./bin/pkgcloud/network/create",
+    "pkgcloud-network-list": "./bin/pkgcloud/network/list",
+    "pkgcloud-network-destroy": "./bin/pkgcloud/network/destroy",
+    "pkgcloud-network-port-list": "./bin/pkgcloud/network/port/list",
+    "pkgcloud-network-port-create": "./bin/pkgcloud/network/port/create",
+    "pkgcloud-network-port-destroy": "./bin/pkgcloud/network/port/destroy",
     "pkgcloud-subnet": "./bin/pkgcloud/network/subnet/subnet",
     "pkgcloud-subnet-create": "./bin/pkgcloud/network/subnet/create",
     "pkgcloud-subnet-list": "./bin/pkgcloud/network/subnet/list",

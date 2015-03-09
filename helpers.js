@@ -5,6 +5,7 @@ var table = require('cli-table');
 var path = require('path');
 var dateformat = require('dateformat');
 var prettyjson = require('prettyjson');
+var _ = require('underscore');
 
 var exports = {};
 
@@ -19,6 +20,26 @@ var CLIENT_TYPES = {
 };
 
 exports.CLIENT_TYPES = CLIENT_TYPES;
+
+var deserializeFixedIPs = function (arrayObj){
+  var strArray = '',
+  index = 0;
+  for(index=0; index< arrayObj.length ; index++){
+    strArray += "Subnet ID : " + arrayObj[index].subnet_id + "\n"+"IP Address: " + arrayObj[index].ip_address +   "\n";
+  }
+  return strArray;
+};
+
+var deserializeSecurityGroups = function (arrayObj){
+  var strArray = '',
+  index = 0;
+  for(index=0; index< arrayObj.length ; index++){
+    strArray += arrayObj[index] + "\n";
+  }
+
+  return strArray;
+};
+
 
 var loadConfig = function (file) {
   try {
@@ -119,6 +140,7 @@ exports.getNetworkRow = function(network) {
       network.shared || 'N/A'];
 };
 
+<<<<<<< HEAD
 exports.getSubnetTableDefinition = function() {
  return {
     head: ['ID', 'Tenant ID', 'Network ID', 'NAME', 'DHCP', 'IP Version', 'Gateway IP'],
@@ -126,15 +148,43 @@ exports.getSubnetTableDefinition = function() {
   };
 };
 
-exports.getSubnetRow = function(network) {
+exports.getPortTableDefinition = function() {
+ return {
+    head: ['ID', 'Tenant ID', 'Network ID', 'NAME', 'Status', 'Up', 'Mac Address', 'Fixed IPs', 'Security Groups'],
+    colWidths: [40, 40, 40, 30, 10, 10, 20, 50, 50]
+  };
+};
+
+
+exports.getPortRow = function(port) {
   return  [
-      network.id,
-      network.tenantId || 'N/A',
-      network.networkId || 'N/A',
-      network.name || 'N/A',
-      network.enableDhcp ? 'Enabled' : 'Disabled',
-      network.ipVersion || 'N/A',
-      network.gatewayIp || 'N/A'];
+    port.id,
+    port.tenantId || 'N/A',
+    port.networkId || 'N/A',
+    port.name || 'N/A',
+    port.status || 'N/A',
+    port.adminStateUp || 'N/A',
+    port.macAddress || 'N/A',
+    port.fixedIps === undefined ? 'N/A' : deserializeFixedIPs(network.fixedIps),
+    port.securityGroups === undefined ? 'N/A' : deserializeSecurityGroups(network.securityGroups)];
+}
+
+exports.getSubnetTableDefinition = function() {
+ return {
+    head: ['ID', 'Tenant ID', 'Network ID', 'NAME', 'DHCP', 'IP Version', 'Gateway IP'],
+    colWidths: [40, 40, 40, 20, 10, 15, 20]
+  };
+};
+
+exports.getSubnetRow = function(subnet) {
+  return  [
+    subnet.id,
+    subnet.tenantId || 'N/A',
+    subnet.networkId || 'N/A',
+    subnet.name || 'N/A',
+    subnet.enableDhcp ? 'Enabled' : 'Disabled',
+    subnet.ipVersion || 'N/A',
+    subnet.gatewayIp || 'N/A'];
 };
 
 exports.writeBlankInit = function(configPath) {
